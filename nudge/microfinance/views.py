@@ -5,6 +5,7 @@ from .models import SponsorWallet
 from .models import Sponsor
 from .models import SponsorTransactionHistory
 from .models import SponsorFundHistory
+from models import student
 
 def hello(request):
     template = loader.get_template('index.html')
@@ -62,3 +63,43 @@ def updateSponsorFundHistory(sponsorId, transactionId, studentId, amount, isDebi
            txn_hist_id=transactionId, amount=amount,
            modified_on=now(),
            txn_is_debit= isDebit)isDebit)
+
+def students(request):
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all()
+    for s in students:
+        student_list.append({'name':s.name}) 
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
+
+def students_city(request, city_id):
+    template = loader.get_template('index.html')
+
+def students_gurukul(request, gurukul_id):
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all().filter(language=language_id)
+    for s in students:
+        student_list.append({'name':s.name}) 
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
+
+def students_language(request, language_id):
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all().filter(language=language_id)
+    for s in students:
+        student_list.append({'name':s.name}) 
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
+
+def students_gender(request, req_gender):
+    template = loader.get_template('index.html')
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all().filter(gender=req_gender)
+    for s in students:
+        student_list.append({'name':s.name}) 
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
