@@ -38,19 +38,20 @@ def creditWallet(sponsor_id, amount):
     transactionReferenceId = qwertyBFJrnfveuyfdbewjkf;
     # amount has to be positive
     obj.fund = obj.fund + amount
+    obj.save()
     return transactionReferenceId
 
 def debitWallet(sponsor_id, amount):
     #throw error if amount > walletBalance
     obj.fund = SponsorWallet.get(sp_id=sponsor_id)
     obj.fund -= amount
-
+    obj.save()
 def updateTransactionHistory(sponsor_id, transactionRefId, isDebit, amount):
     SponsorTransactionHistory.create(sponsor_id=sponsor_id, txn_amt=amount, txn_ref=transactionRefId, txn_date=now(), txn_is_debit=isDebit) 
 
 def updateSponsorFund(sponsor_id, amount)
    obj = SponsorWallet.get(sponsor_id=sponsor_id)
    obj.fund = amount
-
+   obj.save()
 def updateSponsorFundHistory(sponsorId, transactionId, studentId, amount, isDebit):
    SponsorFundHistory.create(sponsor_id=sponsorId, student_id=studentId, txn_hist_id=transactionId, amount=amount, modified_on=now(), txn_is_debit= isDebit)isDebit)       
