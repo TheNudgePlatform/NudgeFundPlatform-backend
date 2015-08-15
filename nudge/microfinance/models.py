@@ -13,6 +13,7 @@ class Sponsor(models.Model):
     phone_no = models.CharField(max_length=14, default='00919999999999')
     postal_address = models.CharField(max_length=500,null=True)
     modified_on = models.DateField(default=timezone.now)
+
     def __str__(self):              # __unicode__ on Python 2
         return "%s" % (self.name)
 
@@ -22,21 +23,37 @@ class SponsorWallet(models.Model):
     modified_on = models.DateField(default=timezone.now)
 
 class City(models.Model):
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
 class SkillSets(models.Model):
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
 class Language(models.Model):
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
 class Gurukul(models.Model):
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
@@ -55,6 +72,10 @@ class GurukulBatch(models.Model):
     modified_on = models.DateField(default=timezone.now)
 
 class Student(models.Model):
+
+    def __unicode__(self):
+        return u"%s" % self.name
+
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     dob = models.DateField()
