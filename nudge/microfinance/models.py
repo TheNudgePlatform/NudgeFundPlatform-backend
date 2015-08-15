@@ -2,11 +2,11 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-class Sponsor(models.Model):
+class sponsor(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     dob = models.DateField()
-    profile_image = models.ImageField(height_field=100, width_field=100,null=True)
+    profile_image = models.ImageField(null=True)
     gender = models.CharField(max_length=1)
     description = models.CharField(max_length=500,default='')
     email_id = models.EmailField(max_length=100,null=True)
@@ -16,32 +16,32 @@ class Sponsor(models.Model):
     def __str__(self):              # __unicode__ on Python 2
         return "%s" % (self.name)
 
-class SponsorWallet(models.Model):
+class sp_wallet(models.Model):
     sp_id = models.IntegerField(unique=True)
     fund = models.IntegerField(default=0)
     modified_on = models.DateField(default=timezone.now)
 
-class City(models.Model):
+class city(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
-class SkillSets(models.Model):
+class skill_sets(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
-class Language(models.Model):
+class language(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
-class Gurukul(models.Model):
+class gurukul(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     modified_on = models.DateField(default=timezone.now)
 
-class GurukulBatch(models.Model):
+class gurukul_batch(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     gurukul_id = models.IntegerField(default=0)
@@ -54,7 +54,7 @@ class GurukulBatch(models.Model):
     student_ids = models.CharField(max_length=1000)
     modified_on = models.DateField(default=timezone.now)
 
-class Student(models.Model):
+class student(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     dob = models.DateField()
@@ -68,18 +68,19 @@ class Student(models.Model):
     enrolment_date = models.DateField(max_length=500)
     modified_on = models.DateField(default=timezone.now)
 
-class SponsorTransactionHistory(models.Model):
+class sp_txn(models.Model):
     txn_id = models.AutoField(primary_key=True, unique=True)
-    sponsor_id = models.IntegerField(default=0)
+    id = models.IntegerField(default=0)
     txn_amt = models.IntegerField(default=0)
     txn_ref = models.CharField(max_length=50)
     txn_date = models.DateField()
     txn_is_debit = models.BooleanField()
-    
-class SponsorFundHistory(models.Model):
+
+class sp_txn_hst(models.Model):
     txn_hist_id = models.AutoField(primary_key=True, unique=True)
-    sponsor_id = models.IntegerField(default=0)
-    student_id = models.IntegerField(default=0)
-    amount = models.IntegerField(default=0)
+    id = models.IntegerField(default=0)
+    txn_id = models.IntegerField(default=0)
+    st_id = models.IntegerField(default=0)
+    amnt = models.IntegerField(default=0)
     txn_create_id = models.DateField()
-    txn_is_debit = models.BooleanField()
+    txn_is_debit_hst = models.BooleanField()
