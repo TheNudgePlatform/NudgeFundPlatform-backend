@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'nudge.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nudgedb',
+        'NAME': 'nudge',
         'USER': 'root',
-        'PASSWORD': 'r00t',
-        'HOST': '',
-        'PORT': '',
+        'PASSWORD': 'Nudge@InMobi',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
