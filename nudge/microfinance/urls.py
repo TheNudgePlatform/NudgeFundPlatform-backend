@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.hello),
+    url(r'^/sponsor(?P<sponsor_id>[0-9]+)/$', views.sponsor, name='get_sponsor_info'),
 ]
