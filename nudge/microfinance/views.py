@@ -14,7 +14,7 @@ def hello(request):
 def sponsor(request, sponsor_id):
     template = loader.get_template('sponsor.html')
     context = {'getWalletBalance': getWalletBalance(sponsor_id)}
-    return render(request, 'sponsor.html, context)
+    return render(request, 'sponsor.html', context)
 
 def loan_make_payment(sponsor_id, student_id, amount, transactionHistoryId):
     if requiredFundsAvailable(sponsor_id, amount):
@@ -56,7 +56,7 @@ def updateTransactionHistory(sponsor_id, transactionRefId, isDebit, amount):
     SponsorTransactionHistory.create(sponsor_id=sponsor_id, txn_amt=amount, 
     txn_ref=transactionRefId, txn_date=now(), txn_is_debit=isDebit) 
 
-def updateSponsorFund(sponsor_id, amount)
+def updateSponsorFund(sponsor_id, amount):
    obj = SponsorWallet.get(sponsor_id=sponsor_id)
    obj.fund = amount
    obj.save()
