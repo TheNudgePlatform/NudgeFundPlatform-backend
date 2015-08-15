@@ -3,40 +3,47 @@ from django.template import RequestContext, loader
 from django.http import HttpResponse
 from .models import sp_wallet
 from .models import sponsor
+from .models import sponsor_transaction_history
+from .models import sponsor_fund_history
+
 def hello(request):
     template = loader.get_template('index.html')
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
 
-def getWalletBalance(request, sponsor_id):
-    wallet_balance = sp_wallet.get(sp_id=sponsor_id)
-    return wallet_balance
+def getWalletBalance(sponsor_id):
+    obj = sponsor_wallet.get(sp_id=sponsor_id)
+    return obj.fund
 
-def getSponsorInfo(request, sponsor_id):
+def getSponsorInfo(sponsor_id):
     return sponsor.get(id=sponsor_id)
 
-def requiredFundsAvailable(request, sponsor_id, amount):
+def requiredFundsAvailable(sponsor_id, amount):
     walletBalance = getWalletBalance(request, sponsor_id)
     return walletBalance >= amount
 
-define creditWallet(request, sponsor_id, amount):
-    walletBalance = sp_wallet.get(sp_id=sponsor_id)
+def creditWallet(sponsor_id, amount):
+    obj = sponsor_wallet.get(sp_id=sponsor_id)
     #call payment gateway
     #transactionReferenceId is returned by payment gateway
     transactionReferenceId = qwertyBFJrnfveuyfdbewjkf;
     # amount has to be positive
-    sp_wallet.put(sp_id=sponsor_id, walletBalance + amount)
+    obj.fund = obj.fund + amount
     return transactionReferenceId
 
-define debitWallet(request, sponsor_id, amount):
+def debitWallet(sponsor_id, amount):
     #throw error if amount > walletBalance
-    walletBalance = sp_wallet.get(sp_id=sponsor_id)
-    sp_wallet.put(sp_id=sponsor_id, walletBalance - amount)
+    obj.fund = sponsor_wallet.get(sp_id=sponsor_id)
+    obj.fund -= amount
     transactionReferenceId = qwertyBFJrnfveuyfdbewjkf;
-    updateTransactionHistory(sponsor_id, amount, "credit", transactionReferenceId)
+    return transactionReferenceId
 
-define updateSponsorFund(request, sponsor_id, amount)
-   sp_wallet.put(sp_id=sponsor_id, amount)
+def updateTransactionHistory(sponsor_id, transactionRefId, isDebit, amount):
+    sponsor_transaction_history.create(sponsor_id=sponsor_id, txn_amt=amount, txn_ref=transactionRefId, txn_date=now(), txn_is_debit=isDebit) 
 
-define updateSponsorFundHistory(sponsorId, transactionId, studentId, amount):
-     
+def updateSponsorFund(sponsor_id, amount)
+   obj = sponsor_wallet.get(sponsor_id)
+   obj.fund = amount
+
+def updateSponsorFundHistory(sponsorId, transactionId, studentId, amount, isDebit):
+   sponsor_fund_history.create(sponsor_id=sponsorId, student_id=studentId, txn_hist_id=transactionId, amount=amount, modified_on=now(), txn_is_debit= isDebit)isDebit)       
