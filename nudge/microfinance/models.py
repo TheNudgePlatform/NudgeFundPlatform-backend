@@ -8,7 +8,7 @@ class sponsor(models.Model):
     gender = models.CharField(max_length=5)
     description = models.CharField(max_length=500)
     email_id = models.CharField(max_length=100)
-    phone_no = models.IntegerField(max_length=14, default='00919999999999')
+    phone_no = models.CharField(max_length=14, default='00919999999999')
     postal_address = models.CharField(max_length=500)
     modified_on = models.DateField(default=timezone.now)
     def __str__(self):              # __unicode__ on Python 2
