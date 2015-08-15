@@ -11,10 +11,16 @@ def hello(request):
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
 
+def sponsor(request, sponsor_id):
+    template = loader.get_template('sponsor.html')
+    context = {'getWalletBalance': getWalletBalance(sponsor_id)}
+    return render(request, 'sponsor.html, context)
+
 def loan_make_payment(sponsor_id, student_id, amount, transactionHistoryId):
     if requiredFundsAvailable(sponsor_id, amount):
       debitWallet(sponsor_id, amount)
-      updateSponsorFundHistory(sponsor_id, transactionHistoryId, student_id, amount, true)
+      updateSponsorFundHistory(sponsor_id, transactionHistoryId, student_id, 
+      amount, true)
       return true
     else:
       #prompt add to wallet
@@ -47,11 +53,16 @@ def debitWallet(sponsor_id, amount):
     obj.fund -= amount
     obj.save()
 def updateTransactionHistory(sponsor_id, transactionRefId, isDebit, amount):
-    SponsorTransactionHistory.create(sponsor_id=sponsor_id, txn_amt=amount, txn_ref=transactionRefId, txn_date=now(), txn_is_debit=isDebit) 
+    SponsorTransactionHistory.create(sponsor_id=sponsor_id, txn_amt=amount, 
+    txn_ref=transactionRefId, txn_date=now(), txn_is_debit=isDebit) 
 
 def updateSponsorFund(sponsor_id, amount)
    obj = SponsorWallet.get(sponsor_id=sponsor_id)
    obj.fund = amount
    obj.save()
-def updateSponsorFundHistory(sponsorId, transactionId, studentId, amount, isDebit):
-   SponsorFundHistory.create(sponsor_id=sponsorId, student_id=studentId, txn_hist_id=transactionId, amount=amount, modified_on=now(), txn_is_debit= isDebit)isDebit)       
+
+def updateSponsorFundHistory(sponsorId, transactionId, studentId, amount, 
+   isDebit):
+   SponsorFundHistory.create(sponsor_id=sponsorId, student_id=studentId,
+   txn_hist_id=transactionId, amount=amount, modified_on=now(), 
+   txn_is_debit= isDebit)       
