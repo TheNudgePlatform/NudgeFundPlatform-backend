@@ -16,24 +16,24 @@ class sponsor(models.Model):
 
 class sp_wallet(models.Model):
     wallet_id = models.AutoField(promary_key=True, unique=True)
-    id = models.IntegerField()
+    id = models.IntegerField(default=0)
     fund = models.IntegerField(default=0)
     wallet_mod = models.DateField(default=timezone.now)
 
 class sp_txn(models.Model):
     txn_id = models.AutoField(primary_key=True, unique=True)
-    id = models.IntegerField()
-    txn_amt = models.IntegerField()
+    id = models.IntegerField(default=0)
+    txn_amt = models.IntegerField(default=0)
     txn_ref = models.CharField(max_length=50)
     txn_date = models.DateField(default=timezone.now)
     txn_is_debit = models.BooleanField()
     
 class sp_txn_hst(models.Model):
     txn_hist_id = models.AutoField(promary_key=True, unique=True)
-    id = models.IntegerField()
-    txn_id = models.IntegerField()
-    st_id = models.IntegerField()
-    amnt = models.IntegerField()
+    id = models.IntegerField(default=0)
+    txn_id = models.IntegerField(default=0)
+    st_id = models.IntegerField(default=0)
+    amnt = models.IntegerField(default=0)
     txn_create_id = models.DateField()
     txn_is_debit_hst = models.BooleanField()
 
