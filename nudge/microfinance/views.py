@@ -11,6 +11,15 @@ def hello(request):
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
 
+def loan_make_payment(sponsor_id, student_id, amount, transactionHistoryId):
+    if requiredFundsAvailable(sponsor_id, amount):
+      debitWallet(sponsor_id, amount)
+      updateSponsorFundHistory(sponsor_id, transactionHistoryId, student_id, amount, true)
+      return true
+    else:
+      #prompt add to wallet
+      return false
+
 def getWalletBalance(sponsor_id):
     obj = SponsorWallet.get(sp_id=sponsor_id)
     return obj.fund
@@ -35,8 +44,6 @@ def debitWallet(sponsor_id, amount):
     #throw error if amount > walletBalance
     obj.fund = SponsorWallet.get(sp_id=sponsor_id)
     obj.fund -= amount
-    transactionReferenceId = qwertyBFJrnfveuyfdbewjkf;
-    return transactionReferenceId
 
 def updateTransactionHistory(sponsor_id, transactionRefId, isDebit, amount):
     SponsorTransactionHistory.create(sponsor_id=sponsor_id, txn_amt=amount, txn_ref=transactionRefId, txn_date=now(), txn_is_debit=isDebit) 
