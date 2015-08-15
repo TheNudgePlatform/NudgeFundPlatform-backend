@@ -9,4 +9,6 @@ A web-based crowd-funded microfinance platform where individuals can make contri
 
 - Python 2.6 or greater
 - django 1.8
+- django-allauth
+- mysql-db
 
