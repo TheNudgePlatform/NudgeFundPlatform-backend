@@ -3,11 +3,23 @@ from django.db import models
 from django.utils import timezone
 
 class sponsor(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
-    dob = models.DateTimeField()
+    dob = models.DateField()
+    profile_image = models.ImageField(height_field=100, width_field=100,null=True)
+    gender = models.CharField(max_length=5)
+    description = models.CharField(max_length=500,default='')
+    email_id = models.EmailField(max_length=100,null=True)
+    phone_no = models.CharField(max_length=14, default='00919999999999')
+    postal_address = models.CharField(max_length=500,null=True)
+    modified_on = models.DateField(default=timezone.now)
+    def __str__(self):              # __unicode__ on Python 2
+        return "%s" % (self.name)
 
-class sponsor_fund(models.Model):
+class sp_wallet(models.Model):
+    sp_id = models.IntegerField(unique=True)
     fund = models.IntegerField(default=0)
+    modified_on = models.DateField(default=timezone.now)
 
 class city(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
@@ -46,12 +58,29 @@ class student(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
     dob = models.DateField()
-    profile_image = models.CharField(max_length=200,null=True)
+    profile_image = models.ImageField(height_field=100, width_field=100,null=True)
     gender = models.CharField(max_length=1)
     short_description = models.CharField(max_length=200)
     long_description = models.CharField(max_length=500,null=True)
-    email_id = models.CharField(max_length=100,null=True)
+    email_id = models.EmailField(max_length=100,null=True)
     phone_no = models.CharField(max_length=14,null=True)
     postal_address = models.CharField(max_length=500,null=True)
     enrolment_date = models.DateField(max_length=500)
     modified_on = models.DateField(default=timezone.now)
+
+class sp_txn(models.Model):
+    txn_id = models.AutoField(primary_key=True, unique=True)
+    id = models.IntegerField(default=0)
+    txn_amt = models.IntegerField(default=0)
+    txn_ref = models.CharField(max_length=50)
+    txn_date = models.DateField()
+    txn_is_debit = models.BooleanField()
+    
+class sp_txn_hst(models.Model):
+    txn_hist_id = models.AutoField(primary_key=True, unique=True)
+    id = models.IntegerField(default=0)
+    txn_id = models.IntegerField(default=0)
+    st_id = models.IntegerField(default=0)
+    amnt = models.IntegerField(default=0)
+    txn_create_id = models.DateField()
+    txn_is_debit_hst = models.BooleanField()
