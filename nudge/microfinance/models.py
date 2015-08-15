@@ -56,6 +56,7 @@ class Gurukul(models.Model):
 
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
+    city_id = models.IntegerField(default=0)
     modified_on = models.DateField(default=timezone.now)
 
 class GurukulBatch(models.Model):
@@ -87,6 +88,7 @@ class Student(models.Model):
     phone_no = models.CharField(max_length=14,null=True)
     postal_address = models.CharField(max_length=500,null=True)
     enrolment_date = models.DateField(max_length=500)
+    gurukul_id = models.IntegerField()
     modified_on = models.DateField(default=timezone.now)
 
 class SponsorTransactionHistory(models.Model):
