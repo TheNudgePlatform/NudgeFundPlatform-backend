@@ -40,7 +40,7 @@ def studentListingCity(request,c_id):
     gurukul_ids = []
     for g in gurukuls_city:
         gurukul_ids.append(g.id)
-    students = Student.objects.all().filter(gurukul_id in g)
+    students = Student.objects.all().filter(gurukul_id__in=gurukul_ids)
     context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
     return HttpResponse(template.render(context))
 
