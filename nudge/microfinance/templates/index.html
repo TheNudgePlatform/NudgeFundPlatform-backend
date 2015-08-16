@@ -1,2 +1,154 @@
-<h1> Hello World</h1>
-<h1> {{ students_list }} </h1>
+{% extends 'snippets/base_header.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<nav class="navbar navbar-default navbar-fixed-top top-nav jsTopNav">
+    <div class="nav-bg"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo">
+                    <a href="/">
+                        <img src="{% static "images/logo_white.png" %}" alt="Nudge">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-3 text-right">
+                <div class="user-dd jsUserDD">
+                    <label class="user-name <!-- jsUserName -->" for="userDropdown">Hi, John Doe</label>
+                    <ul class="dd-menu">
+                        <li><a href="profile.php#profile">Your Profile</a></li>
+                        <li>Signout</li>
+                    </ul>
+                </div>
+                 <!-- show if not logged in -->
+                <!-- <div>Login</div> -->
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron tile tile-1">
+    <div class="container-fluid">
+        <div id="tile1-carousel" class="carousel slide" data-ride="carousel" data-pause="hover" data-interval="2000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#tile1-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#tile1-carousel" data-slide-to="1"></li>
+                <li data-target="#tile1-carousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="{% static "images/pic1.png" %}" alt="tile1 bg"/>
+                    <div class="carousel-caption text-uppercase"></div>
+                </div>
+                <div class="item">
+                    <img src="{% static "images/pic2.png" %}" alt="tile2 bg"/>
+
+                    <div class="carousel-caption text-uppercase"></div>
+                </div>
+                <div class="item">
+                    <img src="{% static "images/pic3.png" %}" alt="tile3 bg"/>
+                    <div class="carousel-caption text-uppercase"></div>
+                </div>
+            </div>
+            <div class="pon-overlay"></div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron tile tile-2">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				Job skills alone are insufficient to help individuals break out of the cycle of poverty. Our Gurukuls
+				focus on the all-round development of individuals to equip them with life, literacy and livelihood
+				skills.
+			</div>
+		</div>
+		<br /><br />
+		<div class="row text-uppercase v-offset-30">
+			<div class="col-md-12">
+				<div class="flow text-uppercase text-center">
+					<div class="step step-1">Recruitment</div>
+					<div class="step step-2">
+						<a href="#lifeSkills" class="btn-clear btn-clear-primary btn-clear-lg">Life Skills</a>
+						<a href="#adultLiteracy" class="btn-clear btn-clear-primary btn-clear-lg">Adult Literacy</a>
+						<a href="#livelihoodSkill" class="btn-clear btn-clear-primary btn-clear-lg">Livelihood Skills</a>
+					</div>
+					<div class="step step-3">Placements</div>
+					<div class="step step-4"><a href="#lifeguardService" class="btn-clear btn-clear-primary btn-clear-lg">Lifeguard Service</a></div>
+				</div>
+  			</div>
+			</div>
+			<div class="row">
+  			<div class="col-md-12 text-center">
+				The Gurukul program is a rigorous fully-residential program with an emphasis on extensive
+				experiential learning through habit-building and repetition. On completion of the program,
+				individuals are provided with lifelong support to prevent them from falling back into poverty.
+  			</div>
+		</div>
+	</div>
+</div>
+<div class="jumbotron tile tile-3 text-center">
+	<div class="container">
+		<div class="row v-offset-50">
+			<div class="col-md-2"></div>
+			<div class="col-md-3 text-center step flipper">
+				<div class="face front">
+					<div class="center-align">
+                        <img src="{% static "images/pick.png" %}" class="v-offset-20">
+						<div>Pick</div>
+					</div>
+                </div>
+                <div class="face back">
+                    <div class="caption center-align">Pick a student</div>
+                </div>
+			</div>
+			<div class="col-md-3 text-center step flipper">
+				<div class="face front">
+					<div class="center-align">
+                        <img src="{% static "images/loan.png" %}" class="v-offset-20">
+						<div>Lend</div>
+					</div>
+                </div>
+                <div class="face back">
+                    <div class="caption center-align">Lend a loan</div>
+                </div>
+			</div>
+			<div class="col-md-3 text-center step flipper">
+				<div class="face front">
+					<div class="center-align">
+                        <img src="{% static "images/repay.png" %}" class="v-offset-20">
+						<div>Repay</div>
+					</div>
+                </div>
+                <div class="face back">
+                    <div class="caption center-align">Repay</div>
+                </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+                <a class="btn btn-clear btn-clear-lg btn-clear-invert" href="{% url 'students_listing %}">Get Started Now</a>
+			</div>
+		</div>
+	</div>
+</div>
+<footer>
+    <div class="center-align">
+        <div class="social v-offset-40 text-center">
+            <ul class="social-btn">
+                <li><a href="https://www.facebook.com/thenudgefoundation"><i alt="Facebook" class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/thenudge_in"><i alt="Twitter" class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/+ThenudgeOrgIN"><i alt="Google Plus" class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/the-nudge-foundation"><i alt="Linkedin" class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="text-uppercase bottom-logo">© 2015 The/Nudge Foundation</p>
+</footer>
+<script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/app.js" %}" type="text/javascript"></script>
+<!-- <script src="/dist/js/app.min.js" type="text/javascript"></script> -->
+{% endblock %}
