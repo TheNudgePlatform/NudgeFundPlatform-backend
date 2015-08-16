@@ -31,6 +31,11 @@ def student(request, student_id):
     context = RequestContext(request, ctx)
     return HttpResponse(template.render(context))
 
+def sponsorInfo(request, sponsor_id):
+    template = loader.get_template('profile.html)
+    sponsor = Sponsor.objects.get(sponsor_id)
+    return sponsor
+
 def sponsor(request, sponsor_id):
     template = loader.get_template('sponsor.html')
     context = {}
