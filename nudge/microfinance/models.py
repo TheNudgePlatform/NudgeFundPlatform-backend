@@ -7,7 +7,7 @@ class Sponsor(models.Model):
     name = models.CharField(max_length=200)
     dob = models.DateField()
     profile_image = models.ImageField(null=True)
-    gender = models.CharField(max_length=1)
+    gender = models.CharField(max_length=1, default='M')
     description = models.CharField(max_length=500,default='')
     email_id = models.EmailField(max_length=100,null=True)
     phone_no = models.CharField(max_length=14, default='00919999999999')
@@ -98,7 +98,7 @@ class SponsorTransactionHistory(models.Model):
     txn_is_debit = models.BooleanField()
 
 class SponsorFundHistory(models.Model):
-    txn_hist_id = models.AutoField(primary_key=True, unique=True)
+    txn_hist_id = models.IntegerField(default=0)
     sponsor_id = models.IntegerField(default=0)
     student_id = models.IntegerField(default=0)
     amount = models.IntegerField(default=0)
