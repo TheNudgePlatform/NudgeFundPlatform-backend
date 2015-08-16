@@ -2,6 +2,8 @@ from django.contrib import admin
 from microfinance.models import *
 
 # Register your models here.
+admin.site.register(City)
+admin.site.register(Language)
 admin.site.register(Sponsor)
 admin.site.register(Student)
 admin.site.register(Gurukul)

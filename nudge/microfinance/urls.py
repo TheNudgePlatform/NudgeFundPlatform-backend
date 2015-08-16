@@ -10,4 +10,6 @@ urlpatterns = [
         views.studentListing, name="students-list"),
     url(r'^student/(?P<student_id>[0-9]+)$',
         views.student, name="student"),
+    url(r'^students/city/(?P<c_id>[0-9]+)/$',
+        views.studentListingCity, name="students-list")
 ]

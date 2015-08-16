@@ -17,7 +17,38 @@ def index(request):
 
 def studentListing(request):
     template = loader.get_template('list.html')
-    context = RequestContext(request, {})
+    students = Student.objects.all()
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
+    return HttpResponse(template.render(context))
+
+def studentListingGurukul(request,g_id):
+    template = loader.get_template('list.html')
+    students = Student.objects.all().filter(gurukul_id=g_id)
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
+    return HttpResponse(template.render(context))
+
+def studentListingCity(request,c_id):
+    template = loader.get_template('list.html')
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    gurukuls_city = Gurukul.objects.all().filter(city_id=c_id)
+    gurukul_ids = []
+    for g in gurukuls_city:
+        gurukul_ids.append(g.id)
+    students = Student.objects.all().filter(gurukul_id in g)
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
+    return HttpResponse(template.render(context))
+
+def studentListingGender(request,gender_type):
+    template = loader.get_template('list.html')
+    students = Student.objects.all().filter(gender=gender_type)
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
     return HttpResponse(template.render(context))
 
 def student(request, student_id):
@@ -94,6 +125,43 @@ def updateSponsorFund(sponsor_id, amount):
    obj = SponsorWallet.objects.get(sponsor_id=sponsor_id)
    obj.fund = amount
    obj.save()
+
+def students(request):
+    template = loader.get_template('index.html')
+    students = Student.objects.all()
+    context = RequestContext(request,{'students_list':students})
+    return HttpResponse(template.render(context))
+
+def students_city(request, city_id):
+    template = loader.get_template('index.html')
+
+def students_gurukul(request, gurukul_id):
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all().filter(language=language_id)
+    for s in students:
+        student_list.append({'name':s.name})
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
+
+def students_language(request, language_id):
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all().filter(language=language_id)
+    for s in students:
+        student_list.append({'name':s.name})
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
+
+def students_gender(request, req_gender):
+    template = loader.get_template('index.html')
+    student_list = []
+    template = loader.get_template('index.html')
+    students = student.objects.all().filter(gender=req_gender)
+    for s in students:
+        student_list.append({'name':s.name})
+    context = RequestContext(request,{'students_list':student_list})
+    return HttpResponse(template.render(context))
 
 def updateSponsorFundHistory(sponsorId, transactionId, studentId, amount,
    isDebit):
