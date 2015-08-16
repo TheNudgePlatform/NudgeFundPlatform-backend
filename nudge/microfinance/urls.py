@@ -10,5 +10,7 @@ urlpatterns = [
         views.studentListing, name="students-list"),
     url(r'^student/(?P<student_id>[0-9]+)$',
         views.student, name="student"),
-    url(r'^investmentH/(?P<sponsor_id>[0-9]+)$', views.investmentHistory, name="investmentHistory")
+    url(r'^investmentH/(?P<sponsor_id>[0-9]+)$', views.investmentHistory, name="investmentHistory"),
+    url(r'^students/city/(?P<c_id>[0-9]+)/$',
+        views.studentListingCity, name="students-list")
 ]

@@ -88,8 +88,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'nudgedb',
         'USER': 'root',
-        'PASSWORD': 'r00t',
-        'HOST': '',
+        'PASSWORD': 'Nudge@InMobi',
+        'HOST': 'infosec01.ops.hkg1.inmobi.com',
         'PORT': '',
     }
 }

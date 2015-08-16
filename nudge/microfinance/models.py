@@ -9,9 +9,9 @@ class Sponsor(models.Model):
     profile_image = models.ImageField(upload_to='/static/',null=True)
     gender = models.CharField(max_length=1, default='M')
     description = models.CharField(max_length=500,default='')
-    email_id = models.EmailField(max_length=100,null=True)
-    phone_no = models.CharField(max_length=14, default='00919999999999')
-    postal_address = models.CharField(max_length=500,null=True)
+    email_id = models.EmailField(max_length=100,blank=True)
+    phone_no = models.CharField(max_length=14,blank=True)
+    postal_address = models.CharField(max_length=500,blank=True)
     modified_on = models.DateField(default=timezone.now)
 
     def __str__(self):              # __unicode__ on Python 2
@@ -56,6 +56,7 @@ class Gurukul(models.Model):
 
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=200)
+    city_id = models.IntegerField(default=0)
     modified_on = models.DateField(default=timezone.now)
 
 class GurukulBatch(models.Model):
@@ -82,11 +83,12 @@ class Student(models.Model):
     profile_image = models.ImageField(upload_to='/static/', null=True)
     gender = models.CharField(max_length=1)
     short_description = models.CharField(max_length=200)
-    long_description = models.CharField(max_length=500,null=True)
-    email_id = models.EmailField(max_length=100,null=True)
-    phone_no = models.CharField(max_length=14,null=True)
-    postal_address = models.CharField(max_length=500,null=True)
+    long_description = models.CharField(max_length=500,blank=True)
+    email_id = models.EmailField(max_length=100,blank=True)
+    phone_no = models.CharField(max_length=14,blank=True)
+    postal_address = models.CharField(max_length=500,blank=True)
     enrolment_date = models.DateField(max_length=500)
+    gurukul_id = models.IntegerField()
     modified_on = models.DateField(default=timezone.now)
 
 class SponsorTransactionHistory(models.Model):
