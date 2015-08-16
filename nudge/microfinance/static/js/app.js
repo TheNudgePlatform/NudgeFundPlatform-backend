@@ -20,4 +20,19 @@ $(function () {
 			$(".jsUserDD").removeClass("open");
 		}
 	});
+
+	$(".jqAddMoney").on("click", function(event) {
+		event.preventDefault();
+		$(".jqAddMoneyForm").removeClass("hidden");
+	});
+
+	/* User profile page nav bar handling */
+	var navLiElem = $(".jsUserNav li");
+	navLiElem.on("click", function(event) {
+		var nav = $(this).data("nav");
+		navLiElem.removeClass("active");
+		$(this).addClass("active");
+		$(".jsUserPages > .row").removeClass("show");
+		$("#" + nav).addClass("show");
+	});
 });

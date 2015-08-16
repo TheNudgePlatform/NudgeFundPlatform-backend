@@ -32,9 +32,10 @@ def student(request, student_id):
     return HttpResponse(template.render(context))
 
 def sponsorInfo(request, sponsor_id):
-    template = loader.get_template('profile.html)
+    template = loader.get_template('profile.html')
     sponsor = Sponsor.objects.get(sponsor_id)
-    return sponsor
+    context['sponsor'] = sponsor
+    return render(request, 'profile.html', context)
 
 def sponsor(request, sponsor_id):
     template = loader.get_template('sponsor.html')
@@ -43,9 +44,10 @@ def sponsor(request, sponsor_id):
     context['loan_make_payment'] = loan_make_payment(sponsor_id, 1L, 100, 12345464)
     return render(request, 'sponsor.html', context)
 
-def getInvestmentHistory(request, sponsor_id):
+def investmentHistory(request, sponsor_id):
    template = loader.get_template('profile.html')
-   ihistory = sponsorFundHistory.objects.get(sponsor_id=sponsor_id)
+   ihistory = []
+   ihistory = SponsorFundHistory.objects.filter(sponsor_id=sponsor_id)
    context = {}
    context['investmentHistory'] = ihistory
    return render(request, 'profile.html', context)

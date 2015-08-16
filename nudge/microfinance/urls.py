@@ -10,5 +10,5 @@ urlpatterns = [
         views.studentListing, name="students-list"),
     url(r'^student/(?P<student_id>[0-9]+)$',
         views.student, name="student"),
-    url(r'^investmentHistory/?P<sponsor_id>[0-9]+)/$', views.investmentHistory, name="investment-history")
+    url(r'^investmentH/(?P<sponsor_id>[0-9]+)$', views.investmentHistory, name="investmentHistory")
 ]
