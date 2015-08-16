@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.template import RequestContext, loader
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+
 from .models import SponsorWallet
 from .models import Sponsor
 from .models import SponsorTransactionHistory
-from .models import SponsorFundHistory
+from .models import SponsorFundHistory, Student
+
 import datetime
 
 def index(request):
@@ -15,6 +18,17 @@ def index(request):
 def studentListing(request):
     template = loader.get_template('list.html')
     context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
+
+def student(request, student_id):
+    template = loader.get_template('student-detail.html')
+
+    student = get_object_or_404(Student, id=student_id)
+
+    ctx = {
+            'student': student
+            }
+    context = RequestContext(request, ctx)
     return HttpResponse(template.render(context))
 
 def sponsor(request, sponsor_id):
