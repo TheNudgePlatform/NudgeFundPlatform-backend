@@ -38,6 +38,13 @@ def sponsor(request, sponsor_id):
     context['loan_make_payment'] = loan_make_payment(sponsor_id, 1L, 100, 12345464)
     return render(request, 'sponsor.html', context)
 
+def getInvestmentHistory(request, sponsor_id):
+   template = loader.get_template('profile.html')
+   ihistory = sponsorFundHistory.objects.get(sponsor_id=sponsor_id)
+   context = {}
+   context['investmentHistory'] = ihistory
+   return render(request, 'profile.html', context)
+
 def loan_make_payment(sponsor_id, student_id, amount, transactionHistoryId):
     if requiredFundsAvailable(sponsor_id, amount):
       debitWallet(sponsor_id, amount)
