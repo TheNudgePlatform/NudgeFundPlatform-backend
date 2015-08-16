@@ -34,7 +34,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.linkedin',
     'django.contrib.admin',
     'django.contrib.auth',
