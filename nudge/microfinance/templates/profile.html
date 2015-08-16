@@ -1,13 +1,14 @@
 {% extends 'snippets/base_header.html' %}
 {% load staticfiles %}
-{%block content %} 
+
+{% block content %}
 <nav class="navbar navbar-default navbar-fixed-top top-nav jsTopNav">
     <div class="nav-bg"></div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
                 <div class="logo">
-                    <a href="/">
+                    <a href="/nudge/">
                         <img src="{%static "images/logo_white.png" %}" alt="Nudge">
                     </a>
                 </div>
@@ -16,7 +17,7 @@
                 <div class="user-dd jsUserDD">
                     <label class="user-name <!-- jsUserName -->" for="userDropdown">Haley</label>
                     <ul class="dd-menu">
-                        <li><a href="{% investmentH investmentHistory 1L">Your Profile</a></li>
+                        <li><a href="../investmentH/1">Your Profile</a></li>
                         <li>Signout</li>
                     </ul>
                 </div>
@@ -66,7 +67,7 @@
 					</div>
 					<div class="row card">
 						<div class="col-md-12 user-thumbnail">
-							<h4 class="v-offset-40">Amount in your wallet &nbsp;&nbsp;<span class="nudge-badge">$200</span></h4>
+							<h4 class="v-offset-40">Amount in your wallet &nbsp;&nbsp;<span class="nudge-badge" id="walletAmount">$200</span></h4>
 							<div class="add-money">
 								<form class="form-inline">
 									<div class="form-group v-offset-30 h-offset-20 hidden jqAddMoneyForm">

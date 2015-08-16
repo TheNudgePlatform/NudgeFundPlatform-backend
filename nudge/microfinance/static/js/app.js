@@ -20,10 +20,19 @@ $(function () {
 			$(".jsUserDD").removeClass("open");
 		}
 	});
-
+        var textBoxShown = false;
 	$(".jqAddMoney").on("click", function(event) {
 		event.preventDefault();
-		$(".jqAddMoneyForm").removeClass("hidden");
+                if(!textBoxShown) {
+			$(".jqAddMoneyForm").removeClass("hidden");
+                        textBoxShown = true;
+                } else {
+		       var walletAmountElem = $("#walletAmount");
+                       var value = parseFloat($("#loanAmount").val());
+                       var walletAmount = parseFloat(walletAmountElem.html().substr(1));
+                       walletAmount += value;
+		       walletAmountElem.html("$"+walletAmount);
+                }
 	});
 
 	/* User profile page nav bar handling */
