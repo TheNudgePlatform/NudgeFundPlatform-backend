@@ -6,6 +6,7 @@ from .models import Sponsor
 from .models import SponsorTransactionHistory
 from .models import SponsorFundHistory
 from .models import Student
+from .models import *
 import datetime
 
 def index(request):
@@ -15,7 +16,38 @@ def index(request):
 
 def studentListing(request):
     template = loader.get_template('list.html')
-    context = RequestContext(request, {})
+    students = Student.objects.all()
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
+    return HttpResponse(template.render(context))
+
+def studentListingGurukul(request,g_id):
+    template = loader.get_template('list.html')
+    students = Student.objects.all().filter(gurukul_id=g_id)
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
+    return HttpResponse(template.render(context))
+
+def studentListingCity(request,c_id):
+    template = loader.get_template('list.html')
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    gurukuls_city = Gurukul.objects.all().filter(city_id=c_id)
+    gurukul_ids = []
+    for g in gurukuls_city:
+        gurukul_ids.append(g.id)
+    students = Student.objects.all().filter(gurukul_id in g)
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
+    return HttpResponse(template.render(context))
+
+def studentListingGender(request,gender_type):
+    template = loader.get_template('list.html')
+    students = Student.objects.all().filter(gender=gender_type)
+    cities = City.objects.all()
+    gurukuls = Gurukul.objects.all()
+    context = RequestContext(request,{'student_list':students,'city_list':cities,'gurukul_list':gurukuls})
     return HttpResponse(template.render(context))
 
 def sponsor(request, sponsor_id):
@@ -78,8 +110,6 @@ def updateSponsorFund(sponsor_id, amount):
 def students(request):
     template = loader.get_template('index.html')
     students = Student.objects.all()
-    for s in students:
-       student_list.append({'name':s.name}) 
     context = RequestContext(request,{'students_list':students})
     return HttpResponse(template.render(context))
 

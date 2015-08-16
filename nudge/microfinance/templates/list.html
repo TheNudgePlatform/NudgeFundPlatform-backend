@@ -8,11 +8,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <div class="logo">
+                <!--div class="logo">
                     <a href="/">
                         <img src="images/logo_white.png" alt="Nudge">
                     </a>
-                </div>
+                </div-->
             </div>
             <div class="col-md-3 col-md-offset-3 text-right">
                 <div class="user-dd jsUserDD">
@@ -36,21 +36,17 @@
 					<div class="form-group">
 						<label class="control-label">City</label>
 						<select class="form-control">
-						  <option>Bangalore</option>
-						  <option>Mumbai</option>
-						  <option>Goa</option>
-						  <option>Kolkata</option>
-						  <option>Chennai</option>
+						  {% for c in city_list %}
+                        			      <option><a href="{% url city c.id %}">{{ c.name }}</a></option>
+                                                  {% endfor %}
 						</select>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Gurukul</label>
 						<select class="form-control">
-						  <option>Gurukul 1</option>
-						  <option>Gurukul 2</option>
-						  <option>Gurukul 3</option>
-						  <option>Gurukul 4</option>
-						  <option>Gurukul 5</option>
+						  {% for g in gurukul_list %}
+                        			      <option><a href="#">{{ g.name }}</a></option>
+                                                  {% endfor %}
 						</select>
 					</div>
 					<div class="form-group">
@@ -67,39 +63,21 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 student-list">
-			<div class="row">
-				<div class="col-md-3 text-center student-thumbnail">
-					<a href="student-detail.php?id=123"><img src="https://rangde-net-gen.s3.amazonaws.com/img/1703107947.gif"/></a>
-				</div>
-				<div class="col-md-6 student-summary">
-					<div class="desc">59 year old Sougaijam Janani Devi lives in the village of Ngaikhong Khulen in Bishnupur, Manipur.</div>
-				</div>
-				<div class="col-md-3 text-center student-action">
-					<button type="submit" class="btn btn-clear-sm btn-nudge">Lend</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3 text-center student-thumbnail">
-					<a href="templates/student-detail.php?id=123"><img src="https://rangde-net-gen.s3.amazonaws.com/img/607961652.gif"/></a>
-				</div>
-				<div class="col-md-6 student-summary">
-					<div class="desc">30 year old Sougaijam Sonia Devi lives in the village of Ngaikhong Khulen in Bishnupur, Manipur.</div>
-				</div>
-				<div class="col-md-3 text-center student-action">
-					<button type="submit" class="btn btn-clear-sm btn-nudge">Lend</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3 text-center student-thumbnail">
-					<a href="templates/student-detail.php?id=123"><img src="https://rangde-net-gen.s3.amazonaws.com/img/539513141.gif"/></a>
-				</div>
-				<div class="col-md-6 student-summary">
-					<div class="desc">Sarangthem Ronibala Devi lives in the Bishnupur town of Manipur with her husband and two children.</div>
-				</div>
-				<div class="col-md-3 text-center student-action">
-					<button type="submit" class="btn btn-clear-sm btn-nudge">Lend</button>
-				</div>
-			</div>
+                        {% for s in student_list %}
+			{% if forloop.counter <= 6 %}
+                              <div class="row">
+                                <div class="col-md-3 text-center student-thumbnail">
+                                        <a href="student-detail.php?id=123"><img src="{{ s.profile_image.url }}"/></a>
+                                </div>
+                                <div class="col-md-6 student-summary">
+                                        <div class="desc">{{ s.short_description }}</div>
+                                </div>
+                                <div class="col-md-3 text-center student-action">
+                                        <button type="submit" class="btn btn-clear-sm btn-nudge">Lend</button>
+                                </div>
+                        </div>
+			{% endif %}
+			{% endfor %}
 		</div>
 	</div>
 </div>
