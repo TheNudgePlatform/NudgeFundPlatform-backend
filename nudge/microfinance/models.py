@@ -98,7 +98,7 @@ class SponsorTransactionHistory(models.Model):
     txn_is_debit = models.BooleanField()
 
 class SponsorFundHistory(models.Model):
-    txn_hist_id = models.AutoField(primary_key=True, unique=True)
+    txn_hist_id = models.IntegerField(default=0)
     sponsor_id = models.IntegerField(default=0)
     student_id = models.IntegerField(default=0)
     amount = models.IntegerField(default=0)
